@@ -20,15 +20,15 @@
 
 - Để tạo deeplink, ta cần add Intent Filter vào manifest của ứng dụng:
 
-<action>
-Chỉ ACTION_VIEWđịnh hành động mục đích để có thể đạt được bộ lọc ý định từ Tìm kiếm của Google.
-  
-<data>
-Có thể có nhiều thẻ <data>, mỗi thẻ đại diện cho định dạng URI phân giải hoạt động. Ít nhất, <data> phải bao gồm thuộc tính android:scheme.
-Ta có thể thêm nhiều thuộc tính để thêm loại URI mà activity chấp nhận. Ví dụ: có thể có nhiều hoạt động chấp nhận các URI tương tự, nhưng khác nhau chỉ đơn giản dựa trên tên đường dẫn. Trong trường hợp này, sử dụng các android:paththuộc tính hoặc của nó pathPatternhoặc pathPrefixcác biến thể để phân biệt mà hoạt động hệ thống sẽ mở các đường dẫn URI khác nhau.
+  <action>
+  - ACTION_VIEW chỉ định hành động mục đích để có thể đạt được bộ lọc ý định từ Tìm kiếm của Google.
 
-<category>
-Bao gồm các BROWSABLE. Nó được yêu cầu intenFilter có thể truy cập được từ trình duyệt web. Không có nó, nhấp vào một liên kết trong trình duyệt có thể giải quyết cho ứng dụng của bạn.
-Cũng bao gồm các DEFAULTthể loại. Điều này cho phép ứng dụng của bạn phản hồi lại implicit intent. Không có điều này, activity chỉ có thể được bắt đầu nếu mục đích chỉ định tên thành phần ứng dụng của bạn.
+  <data>
+  - Có thể có nhiều thẻ <data>, mỗi thẻ đại diện cho định dạng URI phân giải hoạt động. Ít nhất, <data> phải bao gồm thuộc tính android:scheme.
+  - Ta có thể thêm nhiều thuộc tính để thêm loại URI mà activity chấp nhận. Ví dụ: có thể có nhiều hoạt động chấp nhận các URI tương tự, nhưng khác nhau chỉ đơn giản dựa trên tên đường dẫn. Trong trường hợp này, sử dụng các android:paththuộc tính hoặc của nó pathPatternhoặc pathPrefixcác biến thể để phân biệt mà hoạt động hệ thống sẽ mở các đường dẫn URI khác nhau.
 
-Đoạn XML sau đây cho thấy cách có thể chỉ định intenFilter trong Manifest để tạo deeplink. 
+  <category>
+  - Bao gồm các BROWSABLE. Nó được yêu cầu intenFilter có thể truy cập được từ trình duyệt web. Không có nó, nhấp vào một liên kết trong trình duyệt có thể giải quyết cho ứng dụng của bạn.
+  - Cũng bao gồm các DEFAULTthể loại. Điều này cho phép ứng dụng của bạn phản hồi lại implicit intent. Không có điều này, activity chỉ có thể được bắt đầu nếu mục đích chỉ định tên thành phần ứng dụng của bạn.
+
+- Đoạn XML sau đây cho thấy cách có thể chỉ định intenFilter trong Manifest để tạo deeplink. 
