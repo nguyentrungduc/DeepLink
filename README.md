@@ -3,6 +3,8 @@
 - Deep link là các đường dẫn được chia sẻ trên nền tảng mobile, vận hành khá giống hyperlink nhưng thay vì dẫn người dùng đến ngay một địa chỉ web page nào đó, deep link dẫn họ tới một màn hình cụ thể ngay trong ứng dụng.
 - Lợi ích lớn nhất của deeolink trên thiết bị di động là khả năng các nhà tiếp thị và nhà phát triển ứng dụng đưa người dùng trực tiếp vào vị trí cụ thể trong ứng dụng của họ bằng một liên kết chuyên dụng. Cũng giống như deeplink làm cho web trở nên hữu dụng hơn, deeplink mobile cũng làm tương tự cho các ứng dụng di động.
 - Không giống như các deeplink trên web, nơi định dạng liên kết được chuẩn hóa dựa trên các nguyên tắc HTTP , các deeplink trên thiết bị di động không tuân theo một định dạng nhất quán. Điều này gây ra sự nhầm lẫn trong phát triển vì các bộ liên kết khác nhau được yêu cầu để truy cập cùng một ứng dụng trên một hệ điều hành di động khác.
+- Định dạng của URI được sử dụng để kích hoạt deeplink một ứng dụng thường khác nhau tùy thuộc vào hệ điều hành mobile. Các thiết bị Android hoạt động thông qua intent, BlackBerry 10 hoạt động thông qua khung gọi của BB10, ios hoạt động thông qua openUrl,và các thiết bị Windows Phone 8 hoạt động thông qua lớp UriMapper.
+- fb://profile/33138223345là một ví dụ về một deeplink. URI chứa tất cả thông tin cần thiết để khởi chạy trực tiếp vào một vị trí cụ thể trong một ứng dụng, trong trường hợp này là profile có id '33138223345'
 ## Các loại Deeplink
 - Deeplink là một liên kết điều hướng đến một phần nội dung. Đây là phần chung nhất của link. Trong đa số các trường hợp, người dùng sẽ thấy ứng dụng đăng kí deeplink với "open with" dialog
 - Deeplink có thể sử dụng custom URI scheme như myapp://
