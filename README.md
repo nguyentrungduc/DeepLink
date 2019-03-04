@@ -25,36 +25,81 @@
 
   <data>
 - Có thể có nhiều thẻ <data>, mỗi thẻ đại diện cho định dạng URI phân giải hoạt động. Ít nhất, <data> phải bao gồm thuộc tính android:scheme.
-  - Ta có thể thêm nhiều thuộc tính để thêm loại URI mà activity chấp nhận. Ví dụ: có thể có nhiều hoạt động chấp nhận các URI tương tự, nhưng khác nhau chỉ đơn giản dựa trên tên đường dẫn. Trong trường hợp này, sử dụng các android:paththuộc tính hoặc của nó pathPatternhoặc pathPrefix các biến thể để phân biệt mà activity hệ thống sẽ mở các đường dẫn URI khác nhau.
+  - Ta có thể thêm nhiều thuộc tính để thêm loại URI mà activity chấp nhận. Ví dụ: có thể có nhiều activity chấp nhận các URI tương tự, nhưng khác nhau chỉ đơn giản dựa trên tên đường dẫn. Trong trường hợp này, sử dụng các android:path hoặc của nó pathPattern hoặc pathPrefix để phân biệt mà activity hệ thống sẽ mở các đường dẫn URI khác nhau.
 
   <category>
- - Bao gồm các BROWSABLE. Nó được yêu cầu intenFilter có thể truy cập được từ trình duyệt web. Không có nó, nhấp vào một liên kết trong trình duyệt có thể giải quyết cho ứng dụng của bạn.
+ - Bao gồm các BROWSABLE. Nó được yêu cầu intenFilter có thể truy cập được từ trình duyệt web.
   
- - Cũng bao gồm các DEFAULTthể loại. Điều này cho phép ứng dụng của bạn phản hồi lại implicit intent. Không có điều này, activity chỉ có thể được bắt đầu nếu mục đích chỉ định tên thành phần ứng dụng của bạn.
+ - DEFAUL -> cho phép ứng dụng của bạn phản hồi lại implicit intent. Nếu ko, activity chỉ có thể được bắt đầu nếu implict intent là tên component app
 
 - Đoạn XML sau đây cho thấy cách có thể chỉ định intenFilter trong Manifest để tạo deeplink. 
 
-          <activity
-          android:name="com.example.android.DetailActivity"
-          android:label="DetailActivity" >
-          <intent-filter android:label="@string/filter_view_http_gizmos">
-              <action android:name="android.intent.action.VIEW" />
-              <category android:name="android.intent.category.DEFAULT" />
-              <category android:name="android.intent.category.BROWSABLE" />
-              <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
-              <data android:scheme="http"
-                    android:host="www.example.com"
-                    android:pathPrefix="/gizmos" />
-              <!-- note that the leading "/" is required for pathPrefix-->
-          </intent-filter>
-          <intent-filter android:label="@string/filter_view_example_gizmos">
-              <action android:name="android.intent.action.VIEW" />
-              <category android:name="android.intent.category.DEFAULT" />
-              <category android:name="android.intent.category.BROWSABLE" />
-              <!-- Accepts URIs that begin with "example://gizmos” -->
-              <data android:scheme="example"
-                    android:host="gizmos" />
-          </intent-filter>
+          <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+        <intent-filter android:label="ahihi">
+            <action android:name="android.intent.action.VIEW"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+
+            <data
+                    android:host="www.ducnt.com"
+                    android:pathPrefix="/open"
+                    android:scheme="https"/>
+        </intent-filter>
+        <intent-filter android:label="hihi">
+            <action android:name="android.intent.action.VIEW"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+
+            <data
+                    android:host="www.123123.com"
+                    android:pathPrefix="/openn"
+                    android:scheme="https"/>
+        </intent-filter>
       </activity>
+
+### Deeplink với Navigation component 
+- Tìm hiểu về Navigation Component : https://docs.google.com/document/d/1jkHGsQhrFOQ5zcIuGXdUJEiFyXUmiWlfZzgCmTi3Hkw/edit?usp=sharing
+- Với navigation component thì việc này sẽ đơn giản hơn rất nhiều! Nó cho phép chúng ta có thể viết thẳng thông tin mapping giữa url và destination trực tiếp vào navigation graph.
+
+- <deepLink> là tag mà chúng ta sẽ cần dùng để làm điều này. Mỗi một <deepLink> sẽ yêu cầu phải có 1 thuộc tính bắt buộc là app:uri.
+
+- Ngoài việc match trực tiếp Uri thì nó còn hỗ trợ các tính năng sau đây:
+
+- Uri mà không bao gồm giao thức sẽ được coi mặc định là http và https. Ví dụ như www.ducnt.com sẽ được coi là http://www.ducnt.com và https://www.ducnt.com
+
+- Placeholder được viết dưới dạng {placeholder_name} sẽ khớp với 1 hay nhiều ký tự. String value của placeholder có thể mang giá trị của bundle argument với key là tên trùng tên của argument. Ví dụ: http://www.ducnt.com/x/{id} sẽ tương ứng với http://www.ducnt.com/x/4/.
+- Wildcard .* có thể được dùng để match 0 hoặc nhiều ký tự.
+
+- NavController sẽ tự động xử lý ACTION_VIEW intent và tìm deep link phù hợp.
+
+      <activity
+                  android:id="@+id/navigationActivity"
+                  android:name="com.example.deeplink.Navigation"
+                  android:label="Nav">
+
+        <argument
+                android:name="xx"
+                android:defaultValue="hii"
+                app:argType="string"/>
+
+        <deepLink app:uri="www.navigation.com/open/?x={xx}" />
+      </activity>
+      
+  -Read uri : đơn giản sử dụng arg như bt lấy từ bundle 
+  - Manifest : 
+  
+                     <activity android:name=".Navigation">
+                          <nav-graph android:value="@navigation/navigation"/>
+                  </activity>
+                  
+  ### Dynamiclink với Fireb
+
       
   
