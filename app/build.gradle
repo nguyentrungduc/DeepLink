@@ -41,4 +41,5 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-dynamic-links:16.1.7'
+    implementation 'com.google.firebase:firebase-invites:16.1.0'
 }

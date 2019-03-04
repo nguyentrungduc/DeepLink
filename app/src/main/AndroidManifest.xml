@@ -13,6 +13,21 @@
     <activity android:name=".Navigation">
         <nav-graph android:value="@navigation/navigation"/>
     </activity>
+
+    <activity android:name=".DynamicActivity">
+        <intent-filter android:label="dynamic">
+            <action android:name="android.intent.action.VIEW"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+
+            <data
+                    android:host="hihihi.page.link"
+                    android:pathPrefix="/abc"
+                    android:scheme="https"/>
+        </intent-filter>
+
+    </activity>
     <activity android:name=".DetailActivity">
         <intent-filter android:label="detail">
             <action android:name="android.intent.action.VIEW"/>
