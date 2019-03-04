@@ -99,7 +99,45 @@
                           <nav-graph android:value="@navigation/navigation"/>
                   </activity>
                   
-  ### Dynamiclink với Fireb
+  ### DynamicLink với Firebase
+- Là loaị deeplink chạy theo nhiều cách mà mình muốn với nhiều nền tảng, ko quan tâm app đã cài chưa, chưa cài nó có option tuỳ chọn xem mình thích mở cái gì
+- Với dynamic link, ta sẽ có 1 trải nghiệm tuyệt vời trên mọi nền tảng (ios, android, web..)
+- Implement : 
+1. Setup firebase
+- https://firebase.google.com/docs/android/setup
 
-      
-  
+2. CreateDynamic Link 
+
+          val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                  .setLink(Uri.parse("https://www.hihi.com/"))
+                  .setDomainUriPrefix("https://hihi.page.link")
+                  .setAndroidParameters(DynamicLink.AndroidParameters.Builder().build())
+                  .setIosParameters(DynamicLink.IosParameters.Builder("com.hihi.ios").build())
+                  .buildDynamicLink()
+3. Receive 
+- Tương tự deeplink
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="example.com"
+                    android:scheme="https"/>
+            </intent-filter>
+- Get link 
+
+      FirebaseDynamicLinks.getInstance()
+              .getDynamicLink(intent)
+              .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                  // Get deep link from result (may be null if no link is found)
+                  var deepLink: Uri? = null
+                  if (pendingDynamicLinkData != null) {
+                      deepLink = pendingDynamicLinkData.link
+                  }
+
+               
+              }
+              .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
+
+
