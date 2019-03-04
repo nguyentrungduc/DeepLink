@@ -3,59 +3,59 @@
           xmlns:dist="http://schemas.android.com/apk/distribution"
           package="com.example.deeplink">
 
-    <dist:module dist:instant="true"/>
+<application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+    <activity android:name=".Navigation">
+        <nav-graph android:value="@navigation/navigation"/>
+    </activity>
+    <activity android:name=".DetailActivity">
+        <intent-filter android:label="detail">
+            <action android:name="android.intent.action.VIEW"/>
 
-    <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".Navigation">
-        </activity>
-        <activity android:name=".DetailActivity">
-            <intent-filter android:label="detail">
-                <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+            <data
+                    android:host="www.detail.com"
+                    android:pathPrefix="/openn"
+                    android:scheme="https"/>
+        </intent-filter>
+    </activity>
+    <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <data
-                        android:host="www.detail.com"
-                        android:pathPrefix="/openn"
-                        android:scheme="https"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+        <intent-filter android:label="ahihi">
+            <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <intent-filter android:label="ahihi">
-                <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+            <data
+                    android:host="www.ducnt.com"
+                    android:pathPrefix="/open"
+                    android:scheme="https"/>
+        </intent-filter>
+        <intent-filter android:label="hihi">
+            <action android:name="android.intent.action.VIEW"/>
 
-                <data
-                        android:host="www.ducnt.com"
-                        android:pathPrefix="/open"
-                        android:scheme="https"/>
-            </intent-filter>
-            <intent-filter android:label="hihi">
-                <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data
-                        android:host="www.123123.com"
-                        android:pathPrefix="/openn"
-                        android:scheme="https"/>
-            </intent-filter>
-        </activity>
-    </application>
+            <data
+                    android:host="www.123123.com"
+                    android:pathPrefix="/openn"
+                    android:scheme="https"/>
+        </intent-filter>
+    </activity>
+</application>
 
 </manifest>
+

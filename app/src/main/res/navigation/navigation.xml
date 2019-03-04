@@ -19,10 +19,11 @@
             android:label="Nav">
 
         <argument
-                android:name="arg"
+                android:name="xx"
+                android:defaultValue="hii"
                 app:argType="string"/>
 
-        <deepLink app:uri="www.navigation.com/open/?x={arg}" />
+        <deepLink app:uri="www.navigation.com/open/?x={xx}" />
     </activity>
 
 </navigation>
